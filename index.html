@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="title"><span class="BE">BE</span>MOVIES</div>
+        <nav class="nav-links">
+            <a href="#SEARCH">SEARCH</a>
+            <a href="#LATEST">LATEST</a>
+            <a href="#GENRES">GENRES</a>
+            <a href="#REGISTER" id="testreg">REGISTER</a>
+            <a href="#SIGNIN" id="testreg">SIGNIN</a>
+        </nav>
+    </header>
+
+    <section class="modal hidden">
+        <div class="flex">
+            <section class="insideModal">
+                <button class="btn-close">⨉</button>
+                <div class="buttoncontainer">
+                    <button class="touching-button Signup">SIGNUP</button>
+                    <button class="touching-button Login">LOGIN</button>
+                </div>
+                <div class="inputTest">
+
+                    <div class="lepadding">
+                        <input type="text" class="search-barr" id="fname" placeholder="username" name="fname">
+                    </div>
+                    <div class="lepadding">
+                        <input type="password" class="search-barr" id="pwd" placeholder="password" name="pwd">
+                    </div>
+                    <div class="lepadding hiddenMail">
+                        <input type="email" class="search-barr" placeholder="email" id="email" name="email">
+                    </div>
+                </div>
+
+                <div class="lepadding">
+                    <input type="checkbox" id="horns" name="horns" />
+                    <label for="horns">Remember me</label>
+                </div>
+                <div class="testPadding">
+                    <button class="touching-Gros">LOGIN</button>
+                </div>
+                <p class="redd">I forgot my password</p>
+                <p>Not a member yet ? <span class="redd2">Sign up</span></p>
+            </section>
+
+        </div>
+    </section>
+
+    <div class="overlay hidden"></div>
+
+
+
+    <section class="Main">
+
+        <div searchTT>
+            <div class="search">
+                <div class="search-box">
+                    <input type="text" class="search-bar" id="searchinput" placeholder="Search...">
+                    <button class="search-button" id="buttonSearch"> <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="swiper">
+                <div id="SEARCH">
+                    <p>result for <span></span> </p>
+                </div>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- If we need navigation buttons -->
+                <div><img class="swiper-button-prev " src="./flèchegauche.svg" alt=""></div>
+                <div><img class="swiper-button-next" src="./Vector.svg" alt=""></div>
+            </div>
+        </div>
+
+        <div class="latestReleases" id="LATEST">
+            <div class="swiper">
+                <div>
+                    <p>latest releases</p>
+                </div>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <img src="./image.png" alt="">
+                            <div class="overlayD">
+                                <div class="text"> texte ici</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- If we need navigation buttons -->
+                <div><img class="swiper-button-prev" src="./flèchegauche.svg" alt=""></div>
+                <div><img class="swiper-button-next" src="./Vector.svg" alt=""></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="sectionGenre">
+
+        <div class="genres" id="GENRES">
+            <p>Movies by genres</p>
+            <nav class="nav-links-genres">
+                <a href="#Comedy">Comedy</a>
+                <a href="#Drama">Drama</a>
+                <a href="#Action">Action</a>
+                <a href="#Fantasy">Fantasy</a>
+                <a href="#Animation">Animation</a>
+            </nav>
+            <hr>
+        </div>
+        <div class="swiper">
+            <div>
+                <p class="swiperP">input du bouton</p>
+            </div>
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <img src="./image.png" alt="">
+                        <div class="overlayD">
+                            <div class="text"> texte ici</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <img src="./image.png" alt="">
+                        <div class="overlayD">
+                            <div class="text"> texte ici</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <img src="./image.png" alt="">
+                        <div class="overlayD">
+                            <div class="text"> texte ici</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <img src="./image.png" alt="">
+                        <div class="overlayD">
+                            <div class="text"> texte ici</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <img src="./image.png" alt="">
+                        <div class="overlayD">
+                            <div class="text"> texte ici</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- If we need navigation buttons -->
+            <div><img class="swiper-button-prev" src="./flèchegauche.svg" alt=""></div>
+            <div><img class="swiper-button-next" src="./Vector.svg" alt=""></div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footertitle"><span class="BE">BE</span>MOVIES</div>
+        <nav class="footernav-links">
+            <a href="#SEARCH">SEARCH</a>
+            <a href="#LATEST">LATEST</a>
+            <a href="#GENRES">GENRES</a>
+            <a href="#REGISTER" id="testreg">REGISTER</a>
+            <a href="#SIGNIN" id="testreg">SIGNIN</a>
+        </nav>
+        <p class="pfooter">@2023 - All rights reserved</p>
+
+    </footer>
+
+
+    <!-- 
+    <section class="insideModal">
+        <div class="buttoncontainer">
+            <button class="touching-button">SIGNUP</button>
+            <button class="touching-button">LOGIN</button>
+        </div>
+        <div class="inputTest">
+            <input type="text" class="search-barr" id="fname" placeholder="username" name="fname"><br>
+            <input type="password" class="search-barr" id="pwd" placeholder="password" name="pwd">
+        </div>
+        <div>
+            <input type="checkbox" id="horns" name="horns" />
+            <label for="horns">Remember me</label>
+        </div>
+        <button class="touching-Gros">LOGIN</button>
+        <p>I forgot my password</p>
+        <p>Not a member yet ? <span>Sign up</span></p>
+    </section> -->
+
+
+    <section class="modalcard hiddencard">
+        <div class="flexcard">
+            <section class="insideModal">
+                <button class="btn-closecard">⨉</button>
+            </section>
+
+        </div>
+    </section>
+
+
+
+
+
+
+</body>
+<script src="https://kit.fontawesome.com/8b586c9f0b.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="module" src="./app.js"></script>
+
+</html>
