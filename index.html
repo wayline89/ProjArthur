@@ -71,7 +71,7 @@
                     <button class="search-button" id="buttonSearch"> <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
-            <div class="swiper">
+            <div class="swiper" id="searchSwiper">
                 <div id="SEARCH">
                     <p>result for <span></span> </p>
                 </div>
@@ -81,10 +81,16 @@
                     <div class="swiper-slide">
                         <div class="image-container">
                             <img src="./image.png" alt="">
-                            <div class="overlayD">
-                                <div class="text"> texte ici</div>
-                            </div>
-                        </div>
+<!--                        <div class="overlayD">
+                                <h2 class="title">The Godfather part III</h2>
+                                <p class="date">1990</p>
+                                <p class="categories">Crime / Drama / Thriller</p>
+                                <div class="ratings">
+                                    <img src="star.svg" alt="">
+                                    <p class="rating">7.4</p>
+                                </div>
+                            </div>-->
+                        </div> 
                     </div>
                     <div class="swiper-slide">
                         <div class="image-container">
@@ -127,13 +133,12 @@
         </div>
 
         <div class="latestReleases" id="LATEST">
-            <div class="swiper">
+            <div class="swiper" id="lastestSwiper">
                 <div>
                     <p>latest releases</p>
                 </div>
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
-                    <!-- Slides -->
                     <div class="swiper-slide">
                         <div class="image-container">
                             <img src="./image.png" alt="">
@@ -196,9 +201,9 @@
             </nav>
             <hr>
         </div>
-        <div class="swiper">
+        <div class="swiper" id="genreSwiper">
             <div>
-                <p class="swiperP">input du bouton</p>
+                <p class="swiperP"></p>
             </div>
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
@@ -301,8 +306,7 @@
 
 
 </body>
-<script src="https://kit.fontawesome.com/8b586c9f0b.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script type="module" src="./app.js"></script>
-
+    <script src="https://kit.fontawesome.com/8b586c9f0b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="./app.js"></script>
 </html>
