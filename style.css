@@ -146,7 +146,6 @@ p {
     align-items: center;
     justify-content: center;
     gap: 45px;
-    padding: 10px;
 }
 
 .nav-links-genres a {
@@ -155,11 +154,13 @@ p {
     text-decoration: none;
     font-size: 16px;
     padding: 10px;
+    border-radius: 12px;
 }
 
 .nav-links-genres a:hover {
     background-color: #CC0000;
-    border-radius: 12px;
+
+
 }
 
 hr {
