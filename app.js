@@ -70,6 +70,11 @@ const hiddenMail = document.querySelector(".hiddenMail");
 
 // Define a function named Sign that removes the "hiddenMail" class from the hiddenMail element
 const Sign = function () {
+  console.log("enterSign");
+  Login.classList.remove("activeLink");
+  Signup.classList.add("activeLink");
+  Login.classList.add("logOff");
+  Signup.classList.remove("signupOff");
   hiddenMail.classList.remove("hiddenMail");
 };
 
@@ -81,6 +86,11 @@ const Login = document.querySelector(".Login");
 
 // Define a function named Log that adds the "hiddenMail" class to the hiddenMail element
 const Log = function () {
+  console.log("enterLog");
+  Login.classList.add("activeLink");
+  Signup.classList.remove("activeLink");
+  Login.classList.remove("logOff");
+  Signup.classList.add("signupOff");
   hiddenMail.classList.add("hiddenMail");
 };
 
