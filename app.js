@@ -87,24 +87,6 @@ const Log = function () {
 // Add a click event listener to the Login element that calls the Log function when clicked
 Login.addEventListener("click", Log);
 
-/* let navlinksgenres = document.getElementsByClassName("nav-links-genres")[0];
-let Comedy = document.querySelector('a[href="#Comedy"]');
-let Drama = document.querySelector('a[href="#Drama"]');
-let Action = document.querySelector('a[href="#Action"]');
-let Fantasy = document.querySelector('a[href="#Fantasy"]');
-let Animations = document.querySelector('a[href="#Animation"]');
-let swiperP = document.getElementsByClassName("swiperP")[0];
-
-const clickGenres = function () {
-  swiperP.innerHTML = this.innerHTML;
-};
-
-Comedy.addEventListener("click", clickGenres);
-Animations.addEventListener("click", clickGenres);
-Drama.addEventListener("click", clickGenres);
-Action.addEventListener("click", clickGenres);
-Fantasy.addEventListener("click", clickGenres); */
-
 let Searchinput = document.getElementById("searchinput");
 let buttonSearch = document.getElementById("buttonSearch");
 let Searchinput3 = " ";
@@ -181,11 +163,6 @@ const options = {
 
 const err = `An error has occured during your connection to API`;
 
-/* fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
-*/
 const searchWrapper = document.querySelector("#searchSwiper").querySelector(".swiper-wrapper");
 const lastestWrapper = document.querySelector("#lastestSwiper").querySelector(".swiper-wrapper");
 const genreWrapper = document.querySelector("#genreSwiper").querySelector(".swiper-wrapper");
