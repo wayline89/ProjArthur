@@ -266,8 +266,8 @@ function createMovieHTMLArray (results) {
             });
     let rating = Math.round(movie.vote_average*10)/10;
     let id=movie.id;
-
-    htmlArray.push(
+    if (movie.vote_count != 0) { 
+      htmlArray.push(
       `
 <div class="swiper-slide" data-movieId="${id}">
     <div class="image-container">
@@ -285,7 +285,7 @@ function createMovieHTMLArray (results) {
         </div>
     </div>
 </div>
-      `)
+      `)}
   })
   return htmlArray;
 }
@@ -322,14 +322,18 @@ async function displayResult (research) {
   let results = await fetch(`https://api.themoviedb.org/3/search/movie?query=${research}&include_adult=false&language=en-US&page=1`, options)
     .then(response => response.json())
     .then(response => {
-      console.log(response.results);
       return response.results
     })
     .catch(err => console.error(err));
   searchWrapper.innerHTML="";
-  await createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
-  resetSwiper();
-  addClickOnMovies();
+  if (results.length>0) {
+    await createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
+    resetSwiper();
+    addClickOnMovies();
+  } else {
+    headerResearch.innerText += " : No results found";
+  }
+
 }
 const movieModalContentHolder = document.querySelector(".modalcard .contentholder");
 
@@ -351,10 +355,11 @@ async function generateMovieModal(movieId) {
   let image = baseUrl+movie.poster_path;
   let date = new Date(movie.release_date);
   let year = date.getFullYear();
-  let details = movie.overview;
+  let details = movie.overview? movie.overview:"No description available for this movie.";
   let categories ="";
       let indexId=0;
-      movie.genres.forEach(item => {
+      if (movie.genres) {
+        movie.genres.forEach(item => {
           indexId++;
           if (indexId==1) {
               categories += item.name;
@@ -362,11 +367,14 @@ async function generateMovieModal(movieId) {
               categories += " / "+ item.name;
           }
           });
+      } else {
+        categories = "none";
+      }
   let rating = Math.round(movie.vote_average*10)/10;
   let cast = credits.cast;
-  let castDisplayed = ""
+  let castDisplayed = "";
   let indexCast=0;
-    while(indexCast<4) {
+    while(indexCast<4 && cast[indexCast]) {
       if (indexCast==0){
         castDisplayed = cast[indexCast].name;
       } else {
@@ -383,7 +391,7 @@ async function generateMovieModal(movieId) {
         <div class="rating"><img src="star.svg" alt="">${rating}</div>
         <div class="category">${categories}</div>
         <div class="description">${details}</div>
-        <div class="cast"><span>Cast:</span>${castDisplayed}</div>
+        <div class="cast"><span>Cast: </span>${castDisplayed}</div>
     </div>
   `
 }
