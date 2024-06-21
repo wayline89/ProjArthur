@@ -1,32 +1,34 @@
-const swiper = new Swiper(".swiper", {
-  // Optional parameters
-  direction: "horizontal",
-  loop: true,
-  spaceBetween: 40,
-  centeredSlides: false,
-  slidesPerGroup: 1,
-  slidesPerView: 1,
-//   slidesOffsetAfter: 100,
-//   slidesOffsetbefore: 100,
-  breakpoints: {
-    500: {
-      slidesPerView:2,
-    },
-    768: {
-      slidesPerView:3,
-    },
-    1250: {
-      slidesPerView:4,
-    },
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
-
+//function that reset the swipers
+function resetSwiper() {
+  const swiper = new Swiper(".swiper", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+      spaceBetween: 40,
+      centeredSlides: false,
+      slidesPerGroup: 1,
+      slidesPerView: 1,
+    //   slidesOffsetAfter: 100,
+    //   slidesOffsetbefore: 100,
+      breakpoints: {
+        500: {
+          slidesPerView:2,
+        },
+        768: {
+          slidesPerView:3,
+        },
+        1250: {
+          slidesPerView:4,
+        },
+      },
+    
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+}
 // Modal
 
 const modal = document.querySelector(".modal");
@@ -34,6 +36,7 @@ const overlay = document.querySelector(".overlay");
 const openModalBtn = document.querySelectorAll("#testreg");
 const closeModalBtn = document.querySelector(".btn-close");
 /* console.log(openModalBtn); */
+
 // close modal function
 const closeModal = function () {
   modal.classList.add("hidden");
@@ -154,9 +157,12 @@ function modalClosecard() {
   modalcard.classList.add("hiddencard");
 }
 function addClickOnMovies () {
-  let LO = document.querySelectorAll(".image-container");
+  let LO = document.querySelectorAll(".swiper-slide");
   Array.from(LO).forEach(function (e) {
-    e.addEventListener("click", modalCardF);
+    e.addEventListener("click",async (e) =>{
+      await generateMovieModal(e.currentTarget.dataset.movieid);
+      modalCardF(e);
+    });
   });
 }
 addClickOnMovies();
@@ -229,37 +235,6 @@ function getGenreIdList() {
       .catch(err => console.error("failed to fetch the GenreIdList"));
   }
 
-//function that reset the swipers
-function resetSwiper() {
-  const swiper = new Swiper(".swiper", {
-      // Optional parameters
-      direction: "horizontal",
-      loop: true,
-      spaceBetween: 40,
-      centeredSlides: false,
-      slidesPerGroup: 1,
-      slidesPerView: 1,
-    //   slidesOffsetAfter: 100,
-    //   slidesOffsetbefore: 100,
-      breakpoints: {
-        500: {
-          slidesPerView:2,
-        },
-        768: {
-          slidesPerView:3,
-        },
-        1250: {
-          slidesPerView:4,
-        },
-      },
-    
-      // Navigation arrows
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-}
 //function that activate on the click on a genre
 
 function onClickGenre(e) {
@@ -324,7 +299,7 @@ async function displayGenre(genre) {
       .catch(err => console.error(err));
   document.querySelector(".swiperP").innerText=genre;
   genreWrapper.innerHTML="";
-  createMovieHTMLArray(results).forEach(item => genreWrapper.innerHTML+=item);
+  await createMovieHTMLArray(results).forEach(item => genreWrapper.innerHTML+=item);
   resetSwiper();
   addClickOnMovies();
 }
@@ -338,7 +313,7 @@ async function displayLastest() {
     })
     .catch(err => console.error("Error on connecting with the API for Lastest Movies."));
     lastestWrapper.innerHTML="";
-    createMovieHTMLArray(results).forEach(item => lastestWrapper.innerHTML+=item);
+    await createMovieHTMLArray(results).forEach(item => lastestWrapper.innerHTML+=item);
     resetSwiper();
     addClickOnMovies();
 }
@@ -352,10 +327,67 @@ async function displayResult (research) {
     })
     .catch(err => console.error(err));
   searchWrapper.innerHTML="";
-  createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
+  await createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
   resetSwiper();
   addClickOnMovies();
 }
+const movieModalContentHolder = document.querySelector(".modalcard .contentholder");
+
+async function generateMovieModal(movieId) {
+  let movie = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en`, options)
+  .then(response => response.json())
+  .then(response => {
+    return response;
+  })
+  .catch(err => console.error("Error while attempting to get the movie by ID"));
+  
+  let credits = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits`, options)
+  .then(response => response.json())
+  .then(response => {
+    return response;
+  })
+  .catch(err => console.error("Error while attempting to get the credits of the movie by ID"));
+  let title = movie.title;
+  let image = baseUrl+movie.poster_path;
+  let date = new Date(movie.release_date);
+  let year = date.getFullYear();
+  let details = movie.overview;
+  let categories ="";
+      let indexId=0;
+      movie.genres.forEach(item => {
+          indexId++;
+          if (indexId==1) {
+              categories += item.name;
+          } else {
+              categories += " / "+ item.name;
+          }
+          });
+  let rating = Math.round(movie.vote_average*10)/10;
+  let cast = credits.cast;
+  let castDisplayed = ""
+  let indexCast=0;
+    while(indexCast<4) {
+      if (indexCast==0){
+        castDisplayed = cast[indexCast].name;
+      } else {
+        castDisplayed += ", "+cast[indexCast].name;
+      };
+      indexCast++;
+    }
+  movieModalContentHolder.innerHTML=
+  `
+    <div class="imgholder"><img src="${image}" alt=""></div>
+    <div class="textArea">
+        <h2 class="title">${title}</h2>
+        <p class="date">${year}</p>
+        <div class="rating"><img src="star.svg" alt="">${rating}</div>
+        <div class="category">${categories}</div>
+        <div class="description">${details}</div>
+        <div class="cast"><span>Cast:</span>${castDisplayed}</div>
+    </div>
+  `
+}
+
 
 //function that will run at the start
 async function initalisation () {
