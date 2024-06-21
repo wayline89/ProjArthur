@@ -107,18 +107,26 @@ let buttonSearch = document.getElementById("buttonSearch");
 let Searchinput3 = " ";
 
 const logInputValue = function () {
-  Searchinput3 = Searchinput.value;
-/*   console.log(Searchinput3); */
-  spanElement.textContent = Searchinput3;
+  Searchinput3 = Searchinput.value.trim();
+  headerResearch.innerText = "result for "+ Searchinput3;
 };
 
-buttonSearch.addEventListener("click", logInputValue);
+buttonSearch.addEventListener("click",(e)=>{
+  logInputValue();
+  displayResult(Searchinput3);
+});
+Searchinput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    logInputValue();
+    displayResult(Searchinput3);
+  }
+  });
 
 let searchDiv = document.getElementById("SEARCH");
 
 let pElement = searchDiv.querySelector("p");
 
-let spanElement = searchDiv.querySelector("p span");
+let headerResearch = searchDiv.querySelector("p");
 
 // test modal card
 
@@ -334,16 +342,26 @@ async function displayLastest() {
     resetSwiper();
     addClickOnMovies();
 }
-async function displayResult (research) {} {
-  fetch('https://api.themoviedb.org/3/search/movie?query=godfather&include_adult=false&language=en-US&page=1', options)
+
+async function displayResult (research) {
+  let results = await fetch(`https://api.themoviedb.org/3/search/movie?query=${research}&include_adult=false&language=en-US&page=1`, options)
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response.results);
+      return response.results
+    })
     .catch(err => console.error(err));
+  searchWrapper.innerHTML="";
+  createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
+  resetSwiper();
+  addClickOnMovies();
 }
 
 //function that will run at the start
 async function initalisation () {
   genreIdList = await getGenreIdList();
+  headerResearch.innerText="";
+  searchWrapper.innerHTML="";
   displayLastest();
   let firstGenre = navLinks.querySelector("a");
   firstGenre.classList.add("activeLink");
