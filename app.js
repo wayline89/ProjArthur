@@ -358,10 +358,14 @@ async function generateMovieModal(movieId) {
   let title = movie.title;
   let image = "no-poster-found.png";
   if (movie.poster_path) {
-  image = baseUrl+movie.poster_path;
+    image = baseUrl+movie.poster_path;
   }
-  let date = new Date(movie.release_date);
-  let year = date.getFullYear();
+  let year = "No date found."
+  if (movie.release_date) {
+    let date = new Date(movie.release_date);
+    year = date.getFullYear();
+  }
+
   let details = movie.overview? movie.overview:"No description available for this movie.";
   let categories ="";
       let indexId=0;
@@ -377,9 +381,13 @@ async function generateMovieModal(movieId) {
       } else {
         categories = "none";
       }
-  let rating = Math.round(movie.vote_average*10)/10;
+  let rating = "none";
+    if (movie.vote_average) {
+      rating = Math.round(movie.vote_average*10)/10;
+    }
+
   let cast = credits.cast;
-  let castDisplayed = "";
+  let castDisplayed = "No cast information found.";
   let indexCast=0;
     while(indexCast<4 && cast[indexCast]) {
       if (indexCast==0){
