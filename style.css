@@ -422,11 +422,43 @@ button {
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-container:hover .overlayD {
     opacity: 1;
 }
+
+.image-container:hover .overlayD .text {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container:hover .overlayD .title {
+    opacity: 1;
+margin-left: 0px;
+
+}
+
+.image-container:hover .overlayD .ratings  {
+opacity: 1;
+display: flex;
+flex-direction: column-reverse;
+align-items: center;
+justify-content: center;
+}
+
+
+.image-container:hover .overlayD .ratings img {
+    opacity: 1;
+width: 5rem;
+align-items: center;
+justify-content: center;
+}
+
+
 
 .text {
     font-size: 20px;
