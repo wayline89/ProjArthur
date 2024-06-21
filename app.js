@@ -1,4 +1,4 @@
-const swiper = new Swiper(".swiper", {
+/* const swiper = new Swiper(".swiper", {
   // Optional parameters
   direction: "horizontal",
   loop: true,
@@ -25,7 +25,7 @@ const swiper = new Swiper(".swiper", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
-});
+}); */
 
 // Modal
 
@@ -324,7 +324,7 @@ async function displayGenre(genre) {
       .catch(err => console.error(err));
   document.querySelector(".swiperP").innerText=genre;
   genreWrapper.innerHTML="";
-  createMovieHTMLArray(results).forEach(item => genreWrapper.innerHTML+=item);
+  await createMovieHTMLArray(results).forEach(item => genreWrapper.innerHTML+=item);
   resetSwiper();
   addClickOnMovies();
 }
@@ -338,7 +338,7 @@ async function displayLastest() {
     })
     .catch(err => console.error("Error on connecting with the API for Lastest Movies."));
     lastestWrapper.innerHTML="";
-    createMovieHTMLArray(results).forEach(item => lastestWrapper.innerHTML+=item);
+    await createMovieHTMLArray(results).forEach(item => lastestWrapper.innerHTML+=item);
     resetSwiper();
     addClickOnMovies();
 }
@@ -352,10 +352,38 @@ async function displayResult (research) {
     })
     .catch(err => console.error(err));
   searchWrapper.innerHTML="";
-  createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
+  await createMovieHTMLArray(results).forEach(item => searchWrapper.innerHTML+=item);
   resetSwiper();
   addClickOnMovies();
 }
+
+async function generateMovieModal(movieId) {
+  let movie = await fetch('https://api.themoviedb.org/3/movie/755450?language=en-US', options)
+  .then(response => response.json())
+  .then(response => {
+    console.log(response)
+    return response;
+  })
+  .catch(err => console.error(err));
+  let title = movie.title;
+  let image = baseUrl+movie.poster_path;
+  let date = new Date(movie.release_date);
+  let year = date.getFullYear();
+  let categories ="";
+      let indexId=0;
+      movie.genre_ids.forEach(item => {
+          indexId++;
+          if (indexId==1) {
+              categories += getGenreforId(item)
+          } else {
+              categories += " / "+ getGenreforId(item)
+          }
+          });
+  let rating = Math.round(movie.vote_average*10)/10;
+  let id=movie.id;
+}
+
+generateMovieModal(755450)
 
 //function that will run at the start
 async function initalisation () {
