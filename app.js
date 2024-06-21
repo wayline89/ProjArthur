@@ -251,7 +251,11 @@ function createMovieHTMLArray (results) {
   let htmlArray =[];
   results.forEach(movie =>{
     let title = movie.title;
-    let image = baseUrl+movie.poster_path;
+    let image = "no-poster-found.png";
+    if (movie.poster_path) {
+    image = baseUrl+movie.poster_path;
+    }
+    
     let date = new Date(movie.release_date);
     let year = date.getFullYear();
     let categories ="";
@@ -352,7 +356,10 @@ async function generateMovieModal(movieId) {
   })
   .catch(err => console.error("Error while attempting to get the credits of the movie by ID"));
   let title = movie.title;
-  let image = baseUrl+movie.poster_path;
+  let image = "no-poster-found.png";
+  if (movie.poster_path) {
+  image = baseUrl+movie.poster_path;
+  }
   let date = new Date(movie.release_date);
   let year = date.getFullYear();
   let details = movie.overview? movie.overview:"No description available for this movie.";
